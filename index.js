@@ -11,16 +11,25 @@ const authenticationHandler = require('./handler/authentication');
 
 app.get('/tasks', (request, response) => {
   const responseJson = tasksHandler.getTasks();
+  response.status(responseJson.code)
   response.send(responseJson);
 });
 
 app.post('/tasks', (request, response) => {
   let task = request.body;
   const responseJson = tasksHandler.createTask(task);
-
   response.status(responseJson.code)
   response.send(responseJson)
 });
+
+app.get('/tasks/:id', (request, response) => {
+  const responseJson = tasksHandler.getTasks(request.params.id);
+  response.status(responseJson.code)
+  response.send(responseJson);
+});
+
+
+
 
 app.listen(port, () => {
   console.log(`TaskAPI is running on port ${port}`); // eslint-disable-line no-console

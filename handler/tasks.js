@@ -9,9 +9,23 @@ function saveData(data) {
 function generateResponse(code, description, data) {
   return {code, description, data};
 }
-function getTasks() {
+function getTasks(id = 'all') {
+  let parsedId = parseInt(id)
+  if (isNaN(parsedId) && id !== 'all') {
+    return generateResponse(400, id + ' is not a number', {});
+  }
+
   let tasks = require('../data/tasks.json');
-  return generateResponse(200, 'All tasks', tasks.data);
+  if (id === 'all') {
+    return generateResponse(200, 'All tasks', tasks.data);
+  }
+
+  for (let task of tasks.data) {
+    if (parsedId === task.id) {
+      return generateResponse(200, 'Returned Task with the ID ' + id, task);
+    }
+  }
+  return generateResponse(400, 'Task with the ID ' + id + ' not found', {});
 }
 
 module.exports.getTasks = getTasks;
@@ -25,7 +39,7 @@ function createTask(requestBody) {
   }
   let tasks = require('../data/tasks.json');
 
-  task = {
+  let task = {
     "id": tasks.autoincrement,
     "title": requestBody.title,
     "author": requestBody.author,

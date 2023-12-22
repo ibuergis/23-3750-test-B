@@ -1,1 +1,23 @@
-{"autoincrement":2,"schema":{"id":"INTEGER","title":"STRING","author":"STRING","createDate":"UNIX STRING","finishedDate":"UNIX STRING"},"data":[{"id":1,"title":"burger","author":"masterGuy","createDate":1703240705386,"finishedDate":null}]}
+{
+  "autoincrement": 12,
+  "schema": {
+    "id": "INTEGER",
+    "title": "STRING",
+    "author": "STRING",
+    "createDate": "UNIX STRING",
+    "finishedDate": "UNIX STRING"
+  },
+  "data": [
+    {"id": 1, "title": "burger", "author": "masterGuy", "createDate": 1703240705386, "finishedDate": null},
+    {"id": 2, "title": "pizza", "author": "foodie123", "createDate": 1703340705386, "finishedDate": 1703440705386},
+    {"id": 3, "title": "coding adventures", "author": "codeMaster", "createDate": 1703440705387, "finishedDate": 1703540705387},
+    {"id": 4, "title": "gardening tips", "author": "greenThumb", "createDate": 1703540705388, "finishedDate": 1703640705388},
+    {"id": 5, "title": "travel diaries", "author": "wanderlust", "createDate": 1703640705389, "finishedDate": 1703740705389},
+    {"id": 6, "title": "movie reviews", "author": "cinephile", "createDate": 1703740705390, "finishedDate": 1703840705390},
+    {"id": 7, "title": "fitness journey", "author": "gymRat", "createDate": 1703840705391, "finishedDate": 1703940705391},
+    {"id": 8, "title": "book recommendations", "author": "bookworm", "createDate": 1703940705392, "finishedDate": 1704040705392},
+    {"id": 9, "title": "cooking experiments", "author": "chefInMaking", "createDate": 1704040705393, "finishedDate": 1704140705393},
+    {"id": 10, "title": "artistic expressions", "author": "creativeSoul", "createDate": 1704140705394, "finishedDate": 1704240705394},
+    {"id": 11, "title": "tech innovations", "author": "geekyTechie", "createDate": 1704240705395, "finishedDate": 1704340705395}
+  ]
+}
