@@ -92,7 +92,7 @@ function deleteTask(id) {
   for (const task of tasks.data) {
     if (parsedId === task.id) {
       const index = tasks.data.indexOf(task)
-      delete tasks.data[index]
+      tasks.data.splice(index, 1)
       saveData(tasks)
       return generateResponse(200, `Deleted Task with the ID ${id}`, task);
     }
