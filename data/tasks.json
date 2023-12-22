@@ -1,1 +1,11 @@
-[]
+{
+  "autoincrement": 1,
+  "schema": {
+    "id": "INTEGER",
+    "title": "STRING",
+    "autor": "STRING",
+    "createDate": "UNIX STRING",
+    "finishedDate": "UNIX STRING"
+  },
+  "data": []
+}

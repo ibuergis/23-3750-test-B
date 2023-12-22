@@ -1,1 +1,8 @@
-[]
+{
+  "autoincrement": 1,
+  "schema": {
+    "username": "STRING",
+    "password": "STRING"
+  },
+  "data": []
+}
