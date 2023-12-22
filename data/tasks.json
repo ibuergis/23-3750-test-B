@@ -1,11 +1,1 @@
-{
-  "autoincrement": 1,
-  "schema": {
-    "id": "INTEGER",
-    "title": "STRING",
-    "autor": "STRING",
-    "createDate": "UNIX STRING",
-    "finishedDate": "UNIX STRING"
-  },
-  "data": []
-}
+{"autoincrement":2,"schema":{"id":"INTEGER","title":"STRING","author":"STRING","createDate":"UNIX STRING","finishedDate":"UNIX STRING"},"data":[{"id":1,"title":"burger","author":"masterGuy","createDate":1703240705386,"finishedDate":null}]}
