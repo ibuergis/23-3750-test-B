@@ -1,8 +1,19 @@
 let tasks = require("../data/tasks.json")
 
-function getAllTasks() {
-    return tasks;
+emptyTask
+
+function generateResponse(code, description, data) {
+    let response = {
+        "code": code,
+        "description": description,
+        "data": data
+    }
+    return response
 }
 
-module.exports = { getAllTasks }
+function getTasks() {
+    return generateResponse(200, 'All tasks', tasks)
+}
+
+module.exports = { getTasks: getTasks }
 
