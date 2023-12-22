@@ -1,1 +1,1 @@
-users = require('../data/users.json');
+const users = require('../data/users.json');
