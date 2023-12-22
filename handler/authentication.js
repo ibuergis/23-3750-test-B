@@ -78,4 +78,21 @@ function cookieIsValid(cookies) {
 
 module.exports.cookieIsValid = cookieIsValid
 
+function deleteCookies(request, response) {
+    // checking if cookies are valid since else it would be possible to just type in any username to
+    // invalidate their session
+    if (cookieIsValid(request.cookies).code === 202) {
+        for (let user of users.data) {
 
+            if (user.username === request.cookies.username) {
+                users.data[users.data.indexOf(user)].salt = null;
+                saveData(users)
+            }
+        }
+    }
+    response.clearCookie('username')
+    response.clearCookie('authentication')
+    return generateResponse(200, 'logged out', null)
+}
+
+module.exports.deleteCookies = deleteCookies

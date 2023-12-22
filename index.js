@@ -55,6 +55,13 @@ app.get('/verify', (request, response) => {
   response.status(responseJson.code);
   response.send(responseJson);
 });
+
+app.delete('/logout', (request, response) => {
+  const responseJson = authenticationHandler.deleteCookies(request, response);
+  response.status(responseJson.code);
+  response.send(responseJson);
+});
+
 app.listen(port, () => {
   console.log(`TaskAPI is running on port ${port}`); // eslint-disable-line no-console
 });
