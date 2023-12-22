@@ -1,19 +1,22 @@
-express = require("express");
-const app = express();
-port = 3000;
+const express = require('express');
 
-const tasksHandler = require("./handler/tasks");
-const authenticationHandler = require("./handler/authentication");
+const app = express();
+const port = 3000;
+
+const tasksHandler = require('./handler/tasks');
+const authenticationHandler = require('./handler/authentication');
 
 app.get('/tasks', (request, response) => {
-    let responseJson = tasksHandler.getTasks()
-    response.send(responseJson);
+  const responseJson = tasksHandler.getTasks();
+  response.send(responseJson);
 });
 
-app.post('tasks')
+app.get('/tasks', (request, response) => {
+  request.body;
+  const responseJson = tasksHandler.getTasks();
+  response.send(responseJson);
+});
 
 app.listen(port, () => {
-    console.log(`TaskAPI is running on port ${port}`);
+  console.log(`TaskAPI is running on port ${port}`); // eslint-disable-line no-console
 });
-
-

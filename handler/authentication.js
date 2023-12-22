@@ -1,1 +1,1 @@
-users = require('../data/users.json')
+users = require('../data/users.json');
