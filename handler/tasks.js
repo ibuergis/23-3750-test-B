@@ -1,5 +1,5 @@
 const fs = require('fs');
-const {cookieIsValid} = require("./authentication");
+const { cookieIsValid } = require('./authentication');
 
 function validateCookies(cookies) {
   return cookieIsValid(cookies).code === 202;
@@ -16,7 +16,7 @@ function generateResponse(code, description, data) {
 
 function getTasks(cookies, id = 'all') {
   if (!validateCookies(cookies)) {
-    return generateResponse(403, 'Unauthorized', null)
+    return generateResponse(403, 'Unauthorized', null);
   }
 
   const parsedId = parseInt(id, 10);
@@ -41,7 +41,7 @@ module.exports.getTasks = getTasks;
 
 function createTask(cookies, requestBody) {
   if (!validateCookies(cookies)) {
-    return generateResponse(403, 'Unauthorized', null)
+    return generateResponse(403, 'Unauthorized', null);
   }
 
   if (typeof requestBody.title !== 'string') {
@@ -71,7 +71,7 @@ module.exports.createTask = createTask;
 
 function editTask(cookies, id, requestBody) {
   if (!validateCookies(cookies)) {
-    return generateResponse(403, 'Unauthorized', null)
+    return generateResponse(403, 'Unauthorized', null);
   }
 
   const tasks = require('../data/tasks.json');
@@ -101,7 +101,7 @@ module.exports.editTask = editTask;
 
 function deleteTask(cookies, id) {
   if (!validateCookies(cookies)) {
-    return generateResponse(403, 'Unauthorized', null)
+    return generateResponse(403, 'Unauthorized', null);
   }
 
   const tasks = require('../data/tasks.json');
@@ -112,13 +112,13 @@ function deleteTask(cookies, id) {
 
   for (const task of tasks.data) {
     if (parsedId === task.id) {
-      const index = tasks.data.indexOf(task)
-      tasks.data.splice(index, 1)
-      saveData(tasks)
+      const index = tasks.data.indexOf(task);
+      tasks.data.splice(index, 1);
+      saveData(tasks);
       return generateResponse(200, `Deleted Task with the ID ${id}`, task);
     }
   }
   return generateResponse(400, `Task with the ID ${id} not found`, null);
 }
 
-module.exports.deleteTask = deleteTask
+module.exports.deleteTask = deleteTask;
