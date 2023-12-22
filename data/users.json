@@ -2,7 +2,9 @@
   "autoincrement": 1,
   "schema": {
     "username": "STRING",
-    "password": "STRING"
+    "password": " HASH"
   },
-  "data": []
+  "data": [
+    {"id": 1, "username": "ibuergis", "password": "c7bdb8352e88ef1cfeb12a9a4973a4325386d7aa84a0a169a04ea297ae29e5f4"}
+  ]
 }

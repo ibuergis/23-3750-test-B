@@ -12,7 +12,7 @@ function generateResponse(code, description, data) {
 function getTasks(id = 'all') {
   const parsedId = parseInt(id, 10);
   if (Number.isNaN(parsedId) && id !== 'all') {
-    return generateResponse(400, `${id} is not a number`, {});
+    return generateResponse(400, `${id} is not a number`, null);
   }
 
   const tasks = require('../data/tasks.json');
@@ -25,17 +25,17 @@ function getTasks(id = 'all') {
       return generateResponse(200, `Returned Task with the ID ${id}`, task);
     }
   }
-  return generateResponse(400, `Task with the ID ${id} not found`, {});
+  return generateResponse(400, `Task with the ID ${id} not found`, null);
 }
 
 module.exports.getTasks = getTasks;
 
 function createTask(requestBody) {
   if (typeof requestBody.title !== 'string') {
-    return generateResponse(400, 'title is not defined or not a string', {});
+    return generateResponse(400, 'title is not defined or not a string', null);
   }
   if (typeof requestBody.author !== 'string') {
-    return generateResponse(400, 'author is not defined or not a string', {});
+    return generateResponse(400, 'author is not defined or not a string', null);
   }
   const tasks = require('../data/tasks.json');
 
@@ -60,7 +60,7 @@ function editTask(id, requestBody) {
   const tasks = require('../data/tasks.json');
   const parsedId = parseInt(id, 10);
   if (Number.isNaN(parsedId)) {
-    return generateResponse(400, `id "${id}" is not a number`, {});
+    return generateResponse(400, `id "${id}" is not a number`, null);
   }
   for (let i = 0; i < tasks.data.length; i += 1) {
     if (parsedId === tasks.data[i].id) {
@@ -77,7 +77,7 @@ function editTask(id, requestBody) {
       return generateResponse(200, `Edited Task with the ID ${id}`, tasks.data[i]);
     }
   }
-  return generateResponse(400, `Task with the ID ${id} not found`, {});
+  return generateResponse(400, `Task with the ID ${id} not found`, null);
 }
 
 module.exports.editTask = editTask;
@@ -86,7 +86,7 @@ function deleteTask(id) {
   const tasks = require('../data/tasks.json');
   const parsedId = parseInt(id, 10);
   if (Number.isNaN(parsedId)) {
-    return generateResponse(400, `id "${id}" is not a number`, {});
+    return generateResponse(400, `id "${id}" is not a number`, null);
   }
 
   for (const task of tasks.data) {
@@ -94,10 +94,10 @@ function deleteTask(id) {
       const index = tasks.data.indexOf(task)
       delete tasks.data[index]
       saveData(tasks)
-      return generateResponse(200, `Deleted Task with the ID ${id}`, {});
+      return generateResponse(200, `Deleted Task with the ID ${id}`, task);
     }
   }
-  return generateResponse(400, `Task with the ID ${id} not found`, {});
+  return generateResponse(400, `Task with the ID ${id} not found`, null);
 }
 
 module.exports.deleteTask = deleteTask
