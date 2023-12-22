@@ -1,4 +1,9 @@
 const fs = require('fs');
+const {cookieIsValid} = require("./authentication");
+
+function validateCookies(cookies) {
+  return cookieIsValid(cookies).code === 202;
+}
 
 function saveData(data) {
   const json = JSON.stringify(data);
@@ -9,7 +14,11 @@ function generateResponse(code, description, data) {
   return { code, description, data };
 }
 
-function getTasks(id = 'all') {
+function getTasks(cookies, id = 'all') {
+  if (!validateCookies(cookies)) {
+    return generateResponse(403, 'Unauthorized', null)
+  }
+
   const parsedId = parseInt(id, 10);
   if (Number.isNaN(parsedId) && id !== 'all') {
     return generateResponse(400, `${id} is not a number`, null);
@@ -30,7 +39,11 @@ function getTasks(id = 'all') {
 
 module.exports.getTasks = getTasks;
 
-function createTask(requestBody) {
+function createTask(cookies, requestBody) {
+  if (!validateCookies(cookies)) {
+    return generateResponse(403, 'Unauthorized', null)
+  }
+
   if (typeof requestBody.title !== 'string') {
     return generateResponse(400, 'title is not defined or not a string', null);
   }
@@ -56,7 +69,11 @@ function createTask(requestBody) {
 
 module.exports.createTask = createTask;
 
-function editTask(id, requestBody) {
+function editTask(cookies, id, requestBody) {
+  if (!validateCookies(cookies)) {
+    return generateResponse(403, 'Unauthorized', null)
+  }
+
   const tasks = require('../data/tasks.json');
   const parsedId = parseInt(id, 10);
   if (Number.isNaN(parsedId)) {
@@ -82,7 +99,11 @@ function editTask(id, requestBody) {
 
 module.exports.editTask = editTask;
 
-function deleteTask(id) {
+function deleteTask(cookies, id) {
+  if (!validateCookies(cookies)) {
+    return generateResponse(403, 'Unauthorized', null)
+  }
+
   const tasks = require('../data/tasks.json');
   const parsedId = parseInt(id, 10);
   if (Number.isNaN(parsedId)) {

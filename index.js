@@ -13,38 +13,37 @@ const tasksHandler = require('./handler/tasks');
 const authenticationHandler = require('./handler/authentication');
 
 app.get('/tasks', (request, response) => {
-  const responseJson = tasksHandler.getTasks();
+  const responseJson = tasksHandler.getTasks(request.cookies);
   response.status(responseJson.code);
   response.send(responseJson);
 });
 
 app.post('/tasks', (request, response) => {
   const task = request.body;
-  const responseJson = tasksHandler.createTask(task);
+  const responseJson = tasksHandler.createTask(request.cookies, task);
   response.status(responseJson.code);
   response.send(responseJson);
 });
 
 app.get('/tasks/:id', (request, response) => {
-  const responseJson = tasksHandler.getTasks(request.params.id);
+  const responseJson = tasksHandler.getTasks(request.cookies, request.params.id);
   response.status(responseJson.code);
   response.send(responseJson);
 });
 
 app.patch('/tasks/:id', (request, response) => {
-  const responseJson = tasksHandler.editTask(request.params.id, request.body);
+  const responseJson = tasksHandler.editTask(request.cookies, request.params.id, request.body);
   response.status(responseJson.code);
   response.send(responseJson);
 });
 
 app.delete('/tasks/:id', (request, response) => {
-  const responseJson = tasksHandler.deleteTask(request.params.id);
+  const responseJson = tasksHandler.deleteTask(request.cookies, request.params.id);
   response.status(responseJson.code);
   response.send(responseJson);
 });
 
 app.post('/login', (request, response) => {
-  const loginData = request.body;
   const responseJson = authenticationHandler.authenticate(request, response);
   response.status(responseJson.code);
   response.send(responseJson);
@@ -58,8 +57,7 @@ app.get('/verify', (request, response) => {
 
 app.delete('/logout', (request, response) => {
   const responseJson = authenticationHandler.deleteCookies(request, response);
-  response.status(responseJson.code);
-  response.send(responseJson);
+  response.status(responseJson.code).send();
 });
 
 app.listen(port, () => {
